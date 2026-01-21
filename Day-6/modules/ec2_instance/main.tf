@@ -10,7 +10,12 @@ variable "instance_type" {
   description = "This is the instance type, for example: t2.micro"
 }
 
+variable "subnet_id" {
+  description = "This is the subnet ID"
+}
+
 resource "aws_instance" "example" {
     ami = var.ami
     instance_type = var.instance_type
+    subnet_id = var.subnet_id
 }

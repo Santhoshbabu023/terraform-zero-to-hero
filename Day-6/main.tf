@@ -2,9 +2,9 @@ provider "aws" {
   region = "us-east-1"
 }
 
-variable "ami" {
-  description = "value"
-}
+# variable "ami" {
+#   description = "value"
+# }
 
 variable "instance_type" {
   description = "value"
@@ -19,6 +19,7 @@ variable "instance_type" {
 
 module "ec2_instance" {
   source = "./modules/ec2_instance"
-  ami = var.ami
+  ami = data.aws_ami.amazon_linux.id
+  subnet_id = data.aws_subnets.selected.ids[0]
   instance_type = lookup(var.instance_type, terraform.workspace, "t2.micro")
 }
